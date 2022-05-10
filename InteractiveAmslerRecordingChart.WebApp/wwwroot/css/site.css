@@ -1,0 +1,127 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/*--------------------------------------------------*/
+
+div.interactive-amsler-recording-chart {
+    display: flex;
+    flex-direction: row;
+}
+
+#info-and-input-container {
+    padding-left: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+#info-and-input-container button {
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 7px 12px 8px 12px;
+}
+
+button.session-master {
+    background-color: #402F65;
+}
+
+button.session-master:hover {
+    background-color: #9282B6;
+}
+
+#yes {
+    background-color: green;
+}
+
+#yes:hover {
+    background-color: lightgreen;
+}
+
+#no {
+    background-color: darkred;
+}
+
+#no:hover {
+    background-color: indianred;
+}
+
+.invisible-cursor {
+    cursor: none;
+}
+
+/*.active-session-container button.session-master {
+    margin-left: 20rem;
+}*/
+

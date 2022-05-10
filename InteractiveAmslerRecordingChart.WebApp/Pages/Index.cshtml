@@ -1,0 +1,35 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Amsler Recording Chart";
+}
+
+<div class="interactive-amsler-recording-chart">
+    <div id="grid-container">
+        <canvas id="amsler-grid" width="600" height="600"></canvas>
+    </div>
+    <div id="info-and-input-container">
+        <div id="passive-session-container">
+            <h4>Mapping of visual field</h4>
+            <ul>
+                <li>Wear the eyeglasses you normally wear when reading.</li>
+                <li>Position the screen about 14 inches from your face or find a reasonable standard for you to consistently follow, concerning angle and distance.</li>
+                <li>Cover one eye at a time with your hand.</li>
+                <li>Stare at the dot in the center. Do not let your gaze drift from the center dot.</li>
+                <li>Make sure that your screen is clear.</li>
+            </ul>
+            <button class="session-master" onclick="runSession()">Manual session</button>
+            <button class="session-master" onclick="runAltSession()">Guided session</button>
+        </div>
+        <div id="alt-session-container" class="hidden">
+            <h4>Is the orange dot visible?</h4>
+            <button id="yes" onclick="visibilityIsAYes()">Yes</button>
+            <button id="no" onclick="visibilityIsANo()">No</button>
+        </div>
+        <div id="active-session-container" class="hidden">
+            <button class="session-master" onclick="quitSession()">Quit session</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/amslerRecordingChart.js"></script>
