@@ -24,6 +24,9 @@ export async function goRepetitionSession() {
         motherButton.disabled = false;
         coordinatesQueue = [...oldCoordinates];
 
+        document.getElementById("improvement").innerHTML = '';
+        document.getElementById("regression").innerHTML = '';
+
         sessions.flipElementsState(true, false);
         grid.drawDot(coordinatesQueue[0].x, coordinatesQueue[0].y);
     }
@@ -46,8 +49,8 @@ const mapProgression = () => {
             regressionCount++;
         }
     }
-    document.getElementById("improvement").innerHTML = `Coordinates of improvement: ${improvementCount}`;
-    document.getElementById("regression").innerHTML = `Coordinates of regression: ${regressionCount}`;
+    document.getElementById("improvement").innerHTML = `Improved spots: ${improvementCount}`;
+    document.getElementById("regression").innerHTML = `Regressed spots: ${regressionCount}`;
 }
 
 const checkNext = () => {

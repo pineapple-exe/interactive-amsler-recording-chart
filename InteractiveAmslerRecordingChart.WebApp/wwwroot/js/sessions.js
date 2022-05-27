@@ -59,7 +59,6 @@ export const flipElementsState = (thisIsStart, thisIsManual) => {
             grid.canvas.removeEventListener('click', handleManualSpotting);
         } else {
             document.getElementById("active-repetition-session-container").classList.remove("hidden");
-            document.getElementById("grid-container").blur();
             repetitionSessionElement.classList.add("hidden");
         }
     }
