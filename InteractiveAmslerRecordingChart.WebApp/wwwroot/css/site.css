@@ -72,7 +72,16 @@ body {
 
 /*--------------------------------------------------*/
 
-div.interactive-amsler-recording-chart {
+.cover {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255);
+}
+
+#interactive-amsler-recording-chart {
     display: flex;
     flex-direction: row;
 }
@@ -85,7 +94,7 @@ div.interactive-amsler-recording-chart {
     display: none;
 }
 
-#info-and-input-container button {
+#info-and-input-container button, input[type=button] {
     border-radius: 10px;
     color: #fff;
     border: none;
@@ -93,12 +102,20 @@ div.interactive-amsler-recording-chart {
     padding: 7px 12px 8px 12px;
 }
 
-button.session-master {
+button.session-master, input[type=button] {
     background-color: #402F65;
 }
 
-button.session-master:hover {
+button.session-master:hover, input[type=button]:hover {
     background-color: #9282B6;
+}
+
+button.session-master:disabled {
+    background-color: #C3C3C3;
+}
+
+button.session-master:disabled:hover {
+    background-color: #C3C3C3;
 }
 
 #yes {
@@ -120,8 +137,3 @@ button.session-master:hover {
 .invisible-cursor {
     cursor: none;
 }
-
-/*.active-session-container button.session-master {
-    margin-left: 20rem;
-}*/
-

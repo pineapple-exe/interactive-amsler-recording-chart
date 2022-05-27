@@ -4,7 +4,15 @@
     ViewData["Title"] = "Amsler Recording Chart";
 }
 
-<div class="interactive-amsler-recording-chart">
+<div id="form-container" class="cover">
+    <form>
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+        <input id="submit-name" type="button" value="Submit">
+    </form>
+</div>
+
+<div id="interactive-amsler-recording-chart">
     <div id="grid-container">
         <canvas id="amsler-grid" width="600" height="600"></canvas>
     </div>
@@ -18,18 +26,38 @@
                 <li>Stare at the dot in the center. Do not let your gaze drift from the center dot.</li>
                 <li>Make sure that your screen is clear.</li>
             </ul>
-            <button class="session-master" onclick="runSession()">Manual session</button>
-            <button class="session-master" onclick="runAltSession()">Guided session</button>
+            <button class="session-master" id="manual-session-catalyst">Run session</button>
+            <button class="session-master" id="repetition-session-catalyst">Check previous coordinates</button>
         </div>
-        <div id="alt-session-container" class="hidden">
-            <h4>Is the orange dot visible?</h4>
-            <button id="yes" onclick="visibilityIsAYes()">Yes</button>
-            <button id="no" onclick="visibilityIsANo()">No</button>
+        <div id="repetition-session-container" class="hidden">
+            <div id="active-repetition-session-container">
+                <h4>Is the orange dot visible?</h4>
+                <button id="yes">Yes</button>
+                <button id="no">No</button>
+            </div>
+            <h6 id="improvement"></h6>
+            <h6 id="regression"></h6>
+            <button class="session-master">Quit session</button>
         </div>
-        <div id="active-session-container" class="hidden">
-            <button class="session-master" onclick="quitSession()">Quit session</button>
+        <div id="manual-session-container" class="hidden">
+            Use the mouse on the grid. Click where the dot becomes invisible or distorted.
+            <button class="session-master">Quit session</button>
         </div>
     </div>
 </div>
 
-<script src="~/js/amslerRecordingChart.js"></script>
+<script type="module">
+    import * as sessions from './js/sessions.js';
+    import * as repetitionSession from './js/repetitionSession.js';
+
+    document.getElementById('submit-name').addEventListener('click', sessions.submitName);
+
+    document.getElementById('manual-session-catalyst').addEventListener('click', sessions.goManualSession);
+    document.getElementById('repetition-session-catalyst').addEventListener('click', repetitionSession.goRepetitionSession);
+
+    document.getElementById('yes').addEventListener('click', repetitionSession.visibilityIsAYes);
+    document.getElementById('no').addEventListener('click', repetitionSession.visibilityIsANo);
+
+    document.querySelector('#manual-session-container > button.session-master').addEventListener('click', sessions.quitSession);
+    document.querySelector('#repetition-session-container > button.session-master').addEventListener('click', sessions.quitSession);
+</script>

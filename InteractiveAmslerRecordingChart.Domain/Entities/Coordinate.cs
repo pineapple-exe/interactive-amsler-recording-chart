@@ -1,12 +1,7 @@
-﻿
+﻿using static InteractiveAmslerRecordingChart.Domain.Utils;
+
 namespace InteractiveAmslerRecordingChart.Domain.Entities
 {
-    public enum VisualFieldStatus
-    {
-        Visible,
-        Deviant
-    }
-
     public class Coordinate
     {
         public int Id { get; set; }

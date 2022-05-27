@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
+using static InteractiveAmslerRecordingChart.Domain.Utils;
 
 namespace InteractiveAmslerRecordingChart.Data.Configurations
 {

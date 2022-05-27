@@ -8,5 +8,7 @@ namespace InteractiveAmslerRecordingChart.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime DateTime { get; set; }
+
+        public List<Coordinate> Coordinates { get; set; }
     }
 }
