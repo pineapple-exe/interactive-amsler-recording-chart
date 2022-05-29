@@ -31,5 +31,11 @@ namespace InteractiveAmslerRecordingChart.WebApp
         {
             return _fetchSpots.FetchOldCoordinates(name);
         }
+
+        [HttpGet("records")]
+        public List<SessionOutputModel> GetRecords()
+        {
+            return _sessionInteractor.FetchRecords();
+        }
     }
 }

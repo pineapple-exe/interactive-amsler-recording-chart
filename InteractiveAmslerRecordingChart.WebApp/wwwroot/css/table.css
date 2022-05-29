@@ -1,0 +1,52 @@
+﻿table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr:nth-of-type(odd) {
+    background: #2E2652;
+}
+
+tr:nth-of-type(even) {
+    background: #352C61;
+}
+
+tr.listing:hover {
+    color: white;
+    background: #5F72C2;
+}
+
+a.id {
+    cursor: pointer;
+    text-decoration: none;
+    color: #ACA3BE;
+    font-weight: bold;
+}
+
+a.id:hover {
+    color: white;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 6px;
+}
+
+th {
+    background: white;
+    color: black;
+}
+
+td {
+    text-align: left;
+    color: white;
+}
+
+td.id {
+    text-align: center;
+}
+
+/*th.id {
+
+}
+*/

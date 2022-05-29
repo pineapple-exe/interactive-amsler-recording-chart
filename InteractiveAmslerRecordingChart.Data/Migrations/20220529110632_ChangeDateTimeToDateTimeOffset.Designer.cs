@@ -4,14 +4,16 @@ using InteractiveAmslerRecordingChart.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InteractiveAmslerRecordingChart.Data.Migrations
 {
     [DbContext(typeof(InteractiveAmslerRecordingChartDbContext))]
-    partial class InteractiveAmslerRecordingChartDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220529110632_ChangeDateTimeToDateTimeOffset")]
+    partial class ChangeDateTimeToDateTimeOffset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

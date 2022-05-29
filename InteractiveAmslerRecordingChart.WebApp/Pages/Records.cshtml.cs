@@ -3,18 +3,17 @@ using Microsoft.Extensions.Logging;
 
 namespace InteractiveAmslerRecordingChart.WebApp.Pages
 {
-    public class IndexModel : PageModel
+    public class RecordsModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<RecordsModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public RecordsModel(ILogger<RecordsModel> logger)
         {
             _logger = logger;
         }
 
         public void OnGet()
         {
-
         }
     }
 }

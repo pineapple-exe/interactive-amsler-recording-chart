@@ -3,14 +3,16 @@ using System.Collections.Generic;
 
 namespace InteractiveAmslerRecordingChart.Domain.Models
 {
-    public class SessionInputModel
+    public class SessionOutputModel
     {
+        public int Id { get; }
         public string Name { get; }
         public List<CoordinateModel> CoordinatesWithStatus { get; }
         public DateTimeOffset DateTime { get; }
 
-        public SessionInputModel(string name, List<CoordinateModel> coordinatesWithStatus, DateTimeOffset dateTime)
+        public SessionOutputModel(int id, string name, List<CoordinateModel> coordinatesWithStatus, DateTimeOffset dateTime)
         {
+            Id = id;
             Name = name;
             CoordinatesWithStatus = coordinatesWithStatus;
             DateTime = dateTime;

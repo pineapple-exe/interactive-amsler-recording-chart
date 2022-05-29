@@ -20,9 +20,9 @@ namespace InteractiveAmslerRecordingChart.Data.Repositories
             _context.SaveChanges();
         }
 
-        public IQueryable<Session> GetPreviousSessions(string name)
+        public IQueryable<Session> GetPreviousSessions()
         {
-            return _context.Sessions.Where(s => s.Name.ToLower() == name.ToLower()).Include(s => s.Coordinates).ThenInclude(c => c.Session);
+            return _context.Sessions.Include(s => s.Coordinates).ThenInclude(c => c.Session);
         }
     }
 }

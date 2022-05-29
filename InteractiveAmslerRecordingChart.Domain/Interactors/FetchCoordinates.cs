@@ -15,11 +15,19 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
             _sessionRepository = sessionRepository;
         }
 
-        public List<CoordinateModel> FetchOldCoordinates(string name)
+        public List<CoordinateModel> FetchOldCoordinates(string name = null)
         {
-            if (!_sessionRepository.GetPreviousSessions(name).Any()) return null;
+            IQueryable<Session> sessions = _sessionRepository.GetPreviousSessions();
 
-            IEnumerable<Coordinate> coordinatesDistinctAndLatest = _sessionRepository.GetPreviousSessions(name)
+            if (name != null)
+            {
+                if (!_sessionRepository.GetPreviousSessions().Any(s => s.Name.ToLower() == name.ToLower()))
+                    return null;
+                else
+                    sessions = sessions.Where(s => s.Name.ToLower() == name.ToLower());
+            }
+
+            IEnumerable<Coordinate> coordinatesDistinctAndLatest = sessions
                 .SelectMany(s => s.Coordinates).ToList()
                 .GroupBy(c => new { c.X, c.Y }).ToList()
                 .Select(g => g.OrderBy(c => c.Session.DateTime).Last());

@@ -29,11 +29,27 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
             Session session = new()
             {
                 Name = sessionInputModel.Name,
-                DateTime = sessionInputModel.DateTime,
+                DateTime = sessionInputModel.DateTime.ToLocalTime(),
                 Coordinates = coordinates
             };
 
             _sessionRepository.AddSession(session);
+        }
+
+        public List<SessionOutputModel> FetchRecords()
+        {
+            IQueryable<Session> sessions = _sessionRepository.GetPreviousSessions();
+            List<SessionOutputModel> sessionModels = new();
+
+            foreach (Session session in sessions)
+            {
+                List<Coordinate> coordinates = session.Coordinates;
+                List<CoordinateModel> coordinateModels = coordinates.Select(c => new CoordinateModel(c.X, c.Y, c.VisualFieldStatus)).ToList();
+
+                sessionModels.Add(new SessionOutputModel(session.Id, session.Name, coordinateModels, session.DateTime));
+            }
+
+            return sessionModels;
         }
     }
 }
