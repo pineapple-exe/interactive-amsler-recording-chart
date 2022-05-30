@@ -1,5 +1,5 @@
 ﻿let records;
-const propertyAliases = ["Session ID", "Name", "Date", "Visual field status"];
+const propertyAliases = ["Session ID", "Name", "Date", "Visual field progression"];
 
 const tableHeads = (propertyAliases) => {
     let heads = "";
@@ -15,30 +15,6 @@ const godHead = (heads) => {
     return `<thead><tr>${heads}</tr></thead>`;
 }
 
-const conciseSessionInfo = (coordinatesWithStatus) => {
-    let clearCount = 0;
-    let deviancyCount = 0;
-    let info = "";
-
-    coordinatesWithStatus.forEach(c => {
-        if (c.visualFieldStatus === 0) {
-            clearCount++;
-        } else {
-            deviancyCount++;
-        }
-    });
-
-    if (deviancyCount > 0 && clearCount > 0) {
-        info += `${deviancyCount} deviant, ${clearCount} clear`;
-    } else if (deviancyCount > 0) {
-        info = `${deviancyCount} deviant`;
-    } else {
-        info += `${clearCount} clear`;
-    }
-
-    return info;
-}
-
 const filledTableBody = (records) => {
     let tableRows = "";
     records.forEach(r => tableRows += 
@@ -46,7 +22,7 @@ const filledTableBody = (records) => {
             <td class="id"><a class="id" href="/record/${r.id}">${r.id}</a></td>
             <td>${r.name}</td>
             <td>${r.dateTime}</td>
-            <td>${conciseSessionInfo(r.coordinatesWithStatus)}</td>
+            <td>Improved: ${r.visualFieldProgression.improvement}, Regressed: ${r.visualFieldProgression.regression}</td>
         </tr>`
     );
 

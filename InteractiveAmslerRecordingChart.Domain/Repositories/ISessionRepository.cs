@@ -6,6 +6,6 @@ namespace InteractiveAmslerRecordingChart.Domain.Repositories
     public interface ISessionRepository
     {
         void AddSession(Session session);
-        IQueryable<Session> GetPreviousSessions();
+        IQueryable<Session> GetSessions();
     }
 }

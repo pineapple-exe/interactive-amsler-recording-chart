@@ -3,6 +3,7 @@ using InteractiveAmslerRecordingChart.Domain.Models;
 using InteractiveAmslerRecordingChart.Domain.Repositories;
 using System.Collections.Generic;
 using System.Linq;
+using static InteractiveAmslerRecordingChart.Domain.Utils;
 
 namespace InteractiveAmslerRecordingChart.Domain.Interactors
 {
@@ -36,9 +37,41 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
             _sessionRepository.AddSession(session);
         }
 
+        public static VisualFieldProgressionModel CalculateProgression(List<Session> personalSessions, Session session)
+        {
+            int improvement = 0;
+            int regression = 0;
+
+            personalSessions = personalSessions.OrderBy(s => s.DateTime).ToList();
+
+            if (personalSessions.Count > 1 && personalSessions.IndexOf(session) > 0)
+            {
+                Session previousSession = personalSessions[personalSessions.IndexOf(session) - 1];
+                IEnumerable<IGrouping<(int X, int Y), Coordinate>> coordinatesGroups = session.Coordinates
+                                                                                    .Concat(previousSession.Coordinates)
+                                                                                    .GroupBy(c => (c.X, c.Y));
+
+                foreach (IGrouping<(int X, int Y), Coordinate> g in coordinatesGroups)
+                {
+                    if (g.Count() > 1)
+                    {
+                        if (g.First().VisualFieldStatus == VisualFieldStatus.Clear && g.Last().VisualFieldStatus == VisualFieldStatus.Deviant)
+                        {
+                            improvement++;
+                        }
+                        else if (g.First().VisualFieldStatus == VisualFieldStatus.Deviant && g.Last().VisualFieldStatus == VisualFieldStatus.Clear)
+                        {
+                            regression++;
+                        }
+                    }
+                }
+            }
+            return new VisualFieldProgressionModel(improvement, regression);
+        }
+
         public List<SessionOutputModel> FetchRecords()
         {
-            IQueryable<Session> sessions = _sessionRepository.GetPreviousSessions();
+            List<Session> sessions = _sessionRepository.GetSessions().ToList();
             List<SessionOutputModel> sessionModels = new();
 
             foreach (Session session in sessions)
@@ -46,9 +79,11 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
                 List<Coordinate> coordinates = session.Coordinates;
                 List<CoordinateModel> coordinateModels = coordinates.Select(c => new CoordinateModel(c.X, c.Y, c.VisualFieldStatus)).ToList();
 
-                sessionModels.Add(new SessionOutputModel(session.Id, session.Name, coordinateModels, session.DateTime));
-            }
+                List<Session> personalSessions = sessions.Where(s => s.Name.ToLower() == session.Name.ToLower()).ToList();
+                VisualFieldProgressionModel progressionModel = CalculateProgression(personalSessions, session);
 
+                sessionModels.Add(new SessionOutputModel(session.Id, session.Name, coordinateModels, session.DateTime, progressionModel));
+            }
             return sessionModels;
         }
     }

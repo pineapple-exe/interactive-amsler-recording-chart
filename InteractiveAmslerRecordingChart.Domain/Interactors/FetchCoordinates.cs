@@ -17,11 +17,11 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
 
         public List<CoordinateModel> FetchOldCoordinates(string name = null)
         {
-            IQueryable<Session> sessions = _sessionRepository.GetPreviousSessions();
+            IQueryable<Session> sessions = _sessionRepository.GetSessions();
 
             if (name != null)
             {
-                if (!_sessionRepository.GetPreviousSessions().Any(s => s.Name.ToLower() == name.ToLower()))
+                if (!_sessionRepository.GetSessions().Any(s => s.Name.ToLower() == name.ToLower()))
                     return null;
                 else
                     sessions = sessions.Where(s => s.Name.ToLower() == name.ToLower());

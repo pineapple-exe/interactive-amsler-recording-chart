@@ -14,8 +14,13 @@ const handleMouseMove = (e) => {
     grid.drawDot(e.offsetX, e.offsetY);
 }
 
+const updateCheckedCoordinate = (newCoo) => {
+    checkedCoordinates = checkedCoordinates.filter(c => !(c.x == newCoo.x && c.y == newCoo.y));
+    checkedCoordinates.push(newCoo);
+}
+
 const handleManualSpotting = (e) => {
-    checkedCoordinates.push({ x: e.offsetX, y: e.offsetY, visualFieldStatus: 1 });
+    updateCheckedCoordinate({ x: e.offsetX, y: e.offsetY, visualFieldStatus: 1 });
 }
 //__________________________________________
 
