@@ -86,5 +86,26 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
             }
             return sessionModels;
         }
+
+        public SessionOutputModel FetchRecord(int id)
+        {
+            return FetchRecords().FirstOrDefault(r => r.Id == id);
+        }
+
+        public int? FetchComparisonId(int currentId, TimeTravel timeTravel)
+        {
+            Session currentSession = _sessionRepository.GetSessions().Where(r => r.Id == currentId).Single();
+            var personsSessions = _sessionRepository.GetSessions()
+                                                    .Where(r => r.Name == currentSession.Name) //add filter for coordinate-sameness!
+                                                    .OrderBy(s => s.DateTime).ToList();
+
+            int indexOfCurrentSession = personsSessions.IndexOf(currentSession);
+            int timeTravelLeap = 1;
+            int timeTravelDirection = timeTravel == TimeTravel.Past ? timeTravelLeap * -1 : timeTravelLeap * 1;
+
+            Session comparisonSessOrNull = personsSessions.SingleOrDefault(s => personsSessions.IndexOf(s) == indexOfCurrentSession + timeTravelDirection);
+
+            return comparisonSessOrNull?.Id;
+        }
     }
 }

@@ -1,0 +1,8 @@
+﻿#record-container ul {
+    list-style: none;
+}
+
+.property-name {
+    font-weight: bold;
+    margin-right: 4px;
+}

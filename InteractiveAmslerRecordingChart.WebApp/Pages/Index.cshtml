@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model RecordModel
 @{
     ViewData["Title"] = "Amsler Recording Chart";
 }
@@ -47,8 +47,8 @@
 </div>
 
 <script type="module">
-    import * as sessions from './js/sessions.js';
-    import * as repetitionSession from './js/repetitionSession.js';
+    import * as sessions from '/js/sessions.js';
+    import * as repetitionSession from '/js/repetitionSession.js';
 
     document.getElementById('submit-name').addEventListener('click', sessions.submitName);
 

@@ -137,3 +137,9 @@ button.session-master:disabled:hover {
 .invisible-cursor {
     cursor: none;
 }
+
+#record-container {
+    background: #2E2652;
+    color: white;
+    padding: 1rem;
+}

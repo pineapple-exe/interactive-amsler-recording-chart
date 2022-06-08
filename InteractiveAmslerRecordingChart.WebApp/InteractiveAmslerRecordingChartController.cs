@@ -2,6 +2,7 @@
 using InteractiveAmslerRecordingChart.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using static InteractiveAmslerRecordingChart.Domain.Utils;
 
 namespace InteractiveAmslerRecordingChart.WebApp
 {
@@ -36,6 +37,18 @@ namespace InteractiveAmslerRecordingChart.WebApp
         public List<SessionOutputModel> GetRecords()
         {
             return _sessionInteractor.FetchRecords();
+        }
+
+        [HttpGet("record")]
+        public SessionOutputModel GetRecord(int id)
+        {
+            return _sessionInteractor.FetchRecord(id);
+        }
+
+        [HttpGet("comparisonId")]
+        public int? GetComparisonId(int currentId, TimeTravel timeTravel)
+        {
+            return _sessionInteractor.FetchComparisonId(currentId, timeTravel);
         }
     }
 }

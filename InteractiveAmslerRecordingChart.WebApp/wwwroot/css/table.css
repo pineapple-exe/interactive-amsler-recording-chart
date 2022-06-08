@@ -40,13 +40,9 @@ th {
 td {
     text-align: left;
     color: white;
+    font-size: smaller;
 }
 
 td.id {
     text-align: center;
 }
-
-/*th.id {
-
-}
-*/

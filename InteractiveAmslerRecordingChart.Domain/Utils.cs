@@ -8,5 +8,11 @@ namespace InteractiveAmslerRecordingChart.Domain
             Clear,
             Deviant
         }
+
+        public enum TimeTravel
+        {
+            Past,
+            Future
+        }
     }
 }

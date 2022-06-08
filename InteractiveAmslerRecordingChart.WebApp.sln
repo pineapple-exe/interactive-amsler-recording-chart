@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveAmslerRecordingChart.WebApp", "InteractiveAmslerRecordingChart.WebApp\InteractiveAmslerRecordingChart.WebApp.csproj", "{B0E79623-725B-4662-9C85-7D4351D2BB29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveAmslerRecordingChart.Domain", "InteractiveAmslerRecordingChart.Domain\InteractiveAmslerRecordingChart.Domain.csproj", "{81C5BA87-2DC0-4DEC-BC94-AB4E3F671137}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveAmslerRecordingChart.Domain", "InteractiveAmslerRecordingChart.Domain\InteractiveAmslerRecordingChart.Domain.csproj", "{81C5BA87-2DC0-4DEC-BC94-AB4E3F671137}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveAmslerRecordingChart.Data", "InteractiveAmslerRecordingChart.Data\InteractiveAmslerRecordingChart.Data.csproj", "{C80AE13E-C120-4535-8B91-4F35B92042ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveAmslerRecordingChart.Data", "InteractiveAmslerRecordingChart.Data\InteractiveAmslerRecordingChart.Data.csproj", "{C80AE13E-C120-4535-8B91-4F35B92042ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

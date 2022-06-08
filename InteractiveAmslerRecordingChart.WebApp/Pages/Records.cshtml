@@ -6,5 +6,9 @@
 
 <table id="records"></table>
 
-<script src="./js/records.js"></script>
+<script type="module">
+    import * as records from '/js/records.js';
+
+    records.renderRecords();
+</script>
 

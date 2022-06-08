@@ -1,21 +1,12 @@
 ﻿import * as grid from './grid.js';
+import { getData } from './utils.js';
 import * as sessions from './sessions.js';
 
 let oldCoordinates;
 let coordinatesQueue;
 
-async function getOldCoordinates() {
-    const endpoint = 'oldCoordinates';
-    let resp = await fetch(`api/InteractiveAmslerRecordingChart/${endpoint}?name=${sessions.name}`);
-
-    if (resp.status == 204)
-        return null;
-    else
-        return await resp.json();
-}
-
 export async function goRepetitionSession() {
-    oldCoordinates = await getOldCoordinates();
+    oldCoordinates = await getData('oldCoordinates', new URLSearchParams({ name: sessions.name }));
     const motherButton = document.getElementById("repetition-session-catalyst");
 
     if (!oldCoordinates) {

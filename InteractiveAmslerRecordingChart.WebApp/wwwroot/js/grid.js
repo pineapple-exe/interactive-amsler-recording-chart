@@ -45,9 +45,9 @@ export const freshAmslerChart = () => {
     drawCenterDot(gridAreaFactor);
 }
 
-export const drawDot = (x, y) => {
+export const drawDot = (x, y, fillStyle = 'indianred') => {
     context.beginPath();
-    context.fillStyle = 'indianred';
+    context.fillStyle = fillStyle;
     context.arc(x, y, 5, 0, 2 * Math.PI);
     context.fill();
     context.fillStyle = 'black';
