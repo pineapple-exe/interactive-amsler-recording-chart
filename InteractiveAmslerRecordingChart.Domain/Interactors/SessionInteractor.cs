@@ -69,9 +69,19 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
             return new VisualFieldProgressionModel(improvement, regression);
         }
 
-        public List<SessionOutputModel> FetchRecords()
+        public SessionsPage FetchSessions(int? pageIndex = null, int? size = null)
         {
-            List<Session> sessions = _sessionRepository.GetSessions().ToList();
+            List<Session> sessions;
+
+            if (pageIndex == null || size == null)
+            { 
+                sessions = _sessionRepository.GetSessions().OrderBy(s => s.Id).ToList();
+            }
+            else
+            {
+                sessions = _sessionRepository.GetSessions().Skip((int)(pageIndex * size)).Take((int)size).OrderBy(s => s.Id).ToList();
+            }
+
             List<SessionOutputModel> sessionModels = new();
 
             foreach (Session session in sessions)
@@ -84,12 +94,12 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
 
                 sessionModels.Add(new SessionOutputModel(session.Id, session.Name, coordinateModels, session.DateTime, progressionModel));
             }
-            return sessionModels;
+            return new SessionsPage(sessionModels, _sessionRepository.GetSessions().Count());
         }
 
-        public SessionOutputModel FetchRecord(int id)
+        public SessionOutputModel FetchSession(int id)
         {
-            return FetchRecords().FirstOrDefault(r => r.Id == id);
+            return FetchSessions().Sessions.FirstOrDefault(r => r.Id == id);
         }
 
         public int? FetchComparisonId(int currentId, TimeTravel timeTravel)

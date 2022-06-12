@@ -33,16 +33,16 @@ namespace InteractiveAmslerRecordingChart.WebApp
             return _fetchSpots.FetchOldCoordinates(name);
         }
 
-        [HttpGet("records")]
-        public List<SessionOutputModel> GetRecords()
+        [HttpGet("sessions")]
+        public SessionsPage GetSessions(int pageIndex, int size)
         {
-            return _sessionInteractor.FetchRecords();
+            return _sessionInteractor.FetchSessions(pageIndex, size);
         }
 
-        [HttpGet("record")]
-        public SessionOutputModel GetRecord(int id)
+        [HttpGet("session")]
+        public SessionOutputModel GetSession(int id)
         {
-            return _sessionInteractor.FetchRecord(id);
+            return _sessionInteractor.FetchSession(id);
         }
 
         [HttpGet("comparisonId")]

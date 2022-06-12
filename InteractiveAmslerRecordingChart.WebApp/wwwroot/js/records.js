@@ -1,5 +1,11 @@
 ﻿import { getData } from './utils.js';
-let records;
+
+let sessions;
+let total;
+const currentUrlParams = new URLSearchParams(document.location.search);
+const pageValue = currentUrlParams.get('page');
+let currentPage = pageValue === null ? 1 : pageValue;
+const size = 50;
 const propertyAliases = ["Session ID", "Name", "Date", "Visual field progression"];
 
 const tableHeads = (propertyAliases) => {
@@ -24,9 +30,9 @@ export const progressionFormat = (improvement, regression) => {
     }
 }
 
-const filledTableBody = (records) => {
+const filledTableBody = (sessions) => {
     let tableRows = "";
-    records.forEach(r => tableRows += 
+    sessions.forEach(r => tableRows += 
         `<tr class="record">
             <td class="id"><a class="id" href="/Record?id=${r.id}">${r.id}</a></td>
             <td>${r.name}</td>
@@ -38,13 +44,27 @@ const filledTableBody = (records) => {
     return `<tbody>${tableRows}</tbody>`;
 }
 
+const pagination = (size, total) => {
+    let pageItems = '';
+
+    for (let i = 1; i <= Math.ceil(total / size); i++) {
+        pageItems += `<li class="page-item"> <a href="/Records?page=${i}">${i}</a> </li>`;
+    }
+
+    return pageItems;
+}
+
 export async function renderRecords() {
-    records = await getData('records', new URLSearchParams({
-        /*        pageIndex: currentPageIndex,*/
-        /*        size: recordsPerPage*/
+    const sessionsPage = await getData('sessions', new URLSearchParams({
+        pageIndex: currentPage - 1,
+        size: size
     }));
 
-    const tableOrgans = `${godHead(tableHeads(propertyAliases))} ${filledTableBody(records)}`;
+    sessions = sessionsPage.sessions;
+    total = sessionsPage.total;
+
+    const tableOrgans = `${godHead(tableHeads(propertyAliases))} ${filledTableBody(sessions)}`;
 
     document.querySelector("table#records").innerHTML = tableOrgans;
+    document.querySelector("ul#pages").innerHTML = pagination(size, total);
 }
