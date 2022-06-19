@@ -34,9 +34,9 @@ namespace InteractiveAmslerRecordingChart.WebApp
         }
 
         [HttpGet("sessions")]
-        public SessionsPage GetSessions(int pageIndex, int size)
+        public SessionsPage GetSessions(int pageIndex, int size, string name = null)
         {
-            return _sessionInteractor.FetchSessions(pageIndex, size);
+            return _sessionInteractor.FetchSessions(pageIndex, size, name);
         }
 
         [HttpGet("session")]

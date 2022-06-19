@@ -69,19 +69,25 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
             return new VisualFieldProgressionModel(improvement, regression);
         }
 
-        public SessionsPage FetchSessions(int? pageIndex = null, int? size = null)
+        private static List<Session> ApplyFilter(IQueryable<Session> sessionsPrimordialSoup, int pageIndex, int size, string name)
         {
-            List<Session> sessions;
+            List<Session> sessions = new();
 
-            if (pageIndex == null || size == null)
-            { 
-                sessions = _sessionRepository.GetSessions().OrderBy(s => s.Id).ToList();
+            if (string.IsNullOrEmpty(name))
+            {
+                sessions = sessionsPrimordialSoup.Skip(pageIndex * size).Take(size).ToList();
             }
             else
             {
-                sessions = _sessionRepository.GetSessions().Skip((int)(pageIndex * size)).Take((int)size).OrderBy(s => s.Id).ToList();
+                sessions.AddRange(sessionsPrimordialSoup.Where(s => s.Name.ToLower() == name.ToLower()));
+                sessions = sessions.Skip(pageIndex * size).Take(size).ToList();
             }
 
+            return sessions;
+        }
+
+        private static List<SessionOutputModel> MapSessions(List<Session> sessions)
+        {
             List<SessionOutputModel> sessionModels = new();
 
             foreach (Session session in sessions)
@@ -94,12 +100,23 @@ namespace InteractiveAmslerRecordingChart.Domain.Interactors
 
                 sessionModels.Add(new SessionOutputModel(session.Id, session.Name, coordinateModels, session.DateTime, progressionModel));
             }
+
+            return sessionModels;
+        }
+
+        public SessionsPage FetchSessions(int pageIndex, int size, string name)
+        {
+            IQueryable<Session> sessionsPrimordialSoup = _sessionRepository.GetSessions().OrderBy(s => s.Id);
+
+            List<Session> sessions = ApplyFilter(sessionsPrimordialSoup, pageIndex, size, name);
+            List<SessionOutputModel> sessionModels = MapSessions(sessions);
+
             return new SessionsPage(sessionModels, _sessionRepository.GetSessions().Count());
         }
 
         public SessionOutputModel FetchSession(int id)
         {
-            return FetchSessions().Sessions.FirstOrDefault(r => r.Id == id);
+            return MapSessions(_sessionRepository.GetSessions().ToList()).FirstOrDefault(r => r.Id == id);
         }
 
         public int? FetchComparisonId(int currentId, TimeTravel timeTravel)

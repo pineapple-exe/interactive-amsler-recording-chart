@@ -5,6 +5,7 @@ let total;
 const currentUrlParams = new URLSearchParams(document.location.search);
 const pageValue = currentUrlParams.get('page');
 let currentPage = pageValue === null ? 1 : pageValue;
+let name = null;
 const size = 50;
 const propertyAliases = ["Session ID", "Name", "Date", "Visual field progression"];
 
@@ -16,6 +17,12 @@ const tableHeads = (propertyAliases) => {
     }
 
     return heads;
+}
+
+export const searchByName = () => {
+    name = document.getElementById('filter-input').value;
+    console.log(name);
+    renderRecords();
 }
 
 const godHead = (heads) => {
@@ -55,10 +62,9 @@ const pagination = (size, total) => {
 }
 
 export async function renderRecords() {
-    const sessionsPage = await getData('sessions', new URLSearchParams({
-        pageIndex: currentPage - 1,
-        size: size
-    }));
+    let parameters = name === null ? { pageIndex: currentPage - 1, size: size } : { pageIndex: currentPage - 1, size: size, name: name };
+
+    const sessionsPage = await getData('sessions', new URLSearchParams(parameters));
 
     sessions = sessionsPage.sessions;
     total = sessionsPage.total;

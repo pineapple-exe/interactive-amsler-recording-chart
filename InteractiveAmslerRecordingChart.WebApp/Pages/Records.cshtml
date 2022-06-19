@@ -4,12 +4,20 @@
     ViewData["Title"] = "Records";
 }
 
+<div id="form-container">
+    <form>
+        <label>Search by name:</label>
+        <input type="text" id="filter-input"><br><br>
+        <input id="apply-filter" type="button" value="Apply">
+    </form>
+</div>
 <table id="records"></table>
 <ul id="pages"></ul>
 
 <script type="module">
     import * as records from '/js/records.js';
 
+    document.getElementById('apply-filter').addEventListener('click', records.searchByName);
     records.renderRecords();
 </script>
 
