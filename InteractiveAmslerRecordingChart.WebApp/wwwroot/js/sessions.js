@@ -35,6 +35,7 @@ export const submitName = () => {
 }
 
 export const flipElementsState = (thisIsStart, thisIsManual) => {
+    const header = document.querySelector("header");
     const manualSessionElement = document.getElementById("manual-session-container");
     const repetitionSessionElement = document.getElementById("repetition-session-container");
     const passiveSessionElement = document.getElementById("passive-session-container");
@@ -42,6 +43,7 @@ export const flipElementsState = (thisIsStart, thisIsManual) => {
     if (thisIsManual == null) thisIsManual = !manualSessionElement.classList.contains("hidden");
 
     if (thisIsStart) {
+        header.classList.add("hidden");
         passiveSessionElement.classList.add("hidden");
 
         if (thisIsManual) {
@@ -54,6 +56,7 @@ export const flipElementsState = (thisIsStart, thisIsManual) => {
             repetitionSessionElement.classList.remove("hidden");
         }
     } else {
+        header.classList.remove("hidden");
         passiveSessionElement.classList.remove("hidden");
 
         if (thisIsManual) {

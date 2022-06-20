@@ -21,7 +21,6 @@ const tableHeads = (propertyAliases) => {
 
 export const searchByName = () => {
     name = document.getElementById('filter-input').value;
-    console.log(name);
     renderRecords();
 }
 

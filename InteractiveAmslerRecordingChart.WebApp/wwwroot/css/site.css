@@ -71,7 +71,10 @@ body {
 }
 
 /*--------------------------------------------------*/
-
+#header-blanket {
+    background-color: white;
+    height: 57px;
+}
 .cover {
     position: absolute;
     padding: 0;
@@ -82,12 +85,17 @@ body {
 }
 
 #interactive-amsler-recording-chart {
+    margin-top: 1rem;
     display: flex;
     flex-direction: row;
 }
 
 #info-and-input-container {
     padding-left: 2rem;
+}
+
+p.sneaky-info {
+    color: #9282B6;
 }
 
 .hidden {
@@ -116,6 +124,13 @@ button.session-master:disabled {
 
 button.session-master:disabled:hover {
     background-color: #C3C3C3;
+}
+
+#yes, #no {
+    margin-right: 3rem;
+    margin-bottom: 4rem;
+    width: 6rem;
+    height: 4rem;
 }
 
 #yes {
