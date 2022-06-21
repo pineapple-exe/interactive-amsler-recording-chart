@@ -43,7 +43,7 @@ export const flipElementsState = (thisIsStart, thisIsManual) => {
     if (thisIsManual == null) thisIsManual = !manualSessionElement.classList.contains("hidden");
 
     if (thisIsStart) {
-        header.classList.add("hidden");
+        header.classList.add("invisibility-cloak");
         passiveSessionElement.classList.add("hidden");
 
         if (thisIsManual) {
@@ -56,7 +56,7 @@ export const flipElementsState = (thisIsStart, thisIsManual) => {
             repetitionSessionElement.classList.remove("hidden");
         }
     } else {
-        header.classList.remove("hidden");
+        header.classList.remove("invisibility-cloak");
         passiveSessionElement.classList.remove("hidden");
 
         if (thisIsManual) {

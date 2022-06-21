@@ -71,10 +71,6 @@ body {
 }
 
 /*--------------------------------------------------*/
-#header-blanket {
-    background-color: white;
-    height: 57px;
-}
 .cover {
     position: absolute;
     padding: 0;
@@ -96,6 +92,10 @@ body {
 
 p.sneaky-info {
     color: #9282B6;
+}
+
+.invisibility-cloak {
+    visibility: hidden;
 }
 
 .hidden {

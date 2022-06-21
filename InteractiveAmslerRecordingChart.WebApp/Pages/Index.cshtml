@@ -2,6 +2,7 @@
 @model RecordModel
 @{
     ViewData["Title"] = "Amsler Recording Chart";
+    ViewData["FullScreenMessage"] = "Press F11 to activate or end full-screen mode.";
 }
 
 <div id="form-container" class="cover">
@@ -15,7 +16,6 @@
 <div id="interactive-amsler-recording-chart">
     <div id="grid-container">
         <canvas id="amsler-grid" width="620" height="620"></canvas>
-        <p class="sneaky-info">Press F11 to activate or end full-screen mode.</p>
     </div>
     <div id="info-and-input-container">
         <div id="passive-session-container">
@@ -39,10 +39,12 @@
             <h6 id="improvement"></h6>
             <h6 id="regression"></h6>
             <button class="session-master">Quit session</button>
+            <p class="sneaky-info">@ViewData["FullScreenMessage"]</p>
         </div>
         <div id="manual-session-container" class="hidden">
              <p>Use the mouse on the grid. Click where the dot becomes invisible or distorted.</p>
              <button class="session-master">Quit session</button>
+             <p class="sneaky-info">@ViewData["FullScreenMessage"]</p>
         </div>
     </div>
 </div>
